@@ -1,6 +1,8 @@
 from orator.orm import Factory
 from app.User import User
+from app.Country import Country
 
+from random import randrange
 factory = Factory()
 
 
@@ -12,4 +14,14 @@ def users_factory(faker):
     }
 
 
+def countries_factory(faker):
+    return {
+        'name': faker.country(),
+        'case_number': randrange(1, 100),
+        'case_death': randrange(1, 100),
+        'case_recovered': randrange(1, 100)
+    }
+
+
 factory.register(User, users_factory)
+factory.register(Country, countries_factory)
