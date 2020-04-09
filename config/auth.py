@@ -3,6 +3,7 @@
 from masonite import env
 
 from app.User import User
+from app.Country import Country
 
 """Authentication Model
 Put the model here that will be used to authenticate users to your site.
@@ -24,13 +25,17 @@ AUTH = {
         'web': {
             'driver': 'cookie',
             'model': User,
-            'drivers': { # 'cookie', 'jwt'
+            'drivers': {  # 'cookie', 'jwt'
                 'jwt': {
                     'reauthentication': True,
                     'lifetime': '5 minutes'
                 }
             }
         },
+        'api': {
+            'driver': 'jwt',
+            'model': Country
+        }
     }
 }
 
