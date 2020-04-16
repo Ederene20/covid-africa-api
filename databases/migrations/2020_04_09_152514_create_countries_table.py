@@ -8,14 +8,11 @@ class CreateCountriesTable(Migration):
         Run the migrations.
         """
         with self.schema.create('countries') as table:
-            table.increments('id')
             table.string('name')
 
             table.integer('case_number')
             table.integer('case_death')
             table.integer('case_recovered')
-
-            table.timestamps()
 
     def down(self):
         """

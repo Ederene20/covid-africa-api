@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def scraper():
     url = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Africa'
 
@@ -13,5 +14,5 @@ def scraper():
     row = []
 
     for tr in data:
-        row.append(tr.text.replace('\n', ' ').strip()) 
+        row.append(tr.text.replace('\n', ' ').strip())
     return row
