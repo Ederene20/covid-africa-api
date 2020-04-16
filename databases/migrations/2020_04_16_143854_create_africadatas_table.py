@@ -16,6 +16,8 @@ class CreateAfricadatasTable(Migration):
             table.integer('total_cases')
             table.integer('total_deaths')
 
+            table.timestamps()
+
     def down(self):
         """
         Revert the migrations.
