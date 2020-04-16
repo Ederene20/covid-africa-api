@@ -14,6 +14,8 @@ class CreateCountriesTable(Migration):
             table.integer('case_death')
             table.integer('case_recovered')
 
+            table.timestamps()
+
     def down(self):
         """
         Revert the migrations.
