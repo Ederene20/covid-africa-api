@@ -6,3 +6,4 @@ from masonite.api.serializers import JSONSerializer
 class CountryResource(Resource):
     model = Country
     methods = ['index', 'show']
+    without = ['created_at']
