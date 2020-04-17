@@ -6,7 +6,7 @@ from app.resources.CountryResource import CountryResource
 from app.resources.AfricaResource import AfricaResource
 
 ROUTES = [
-    Get('/', 'WelcomeController@show').name('welcome'),
+    #Get('/', 'WelcomeController@show').name('welcome'),
 
     Get('/api/countries/@country',
         'AfricaCountryController@single').name('country'),

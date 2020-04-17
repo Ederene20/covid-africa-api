@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 class UpdateData(Task):
     ''' Task description '''
-    twice_daily = ('1, 13')
+    twice_daily = ('1', '13')
 
     def __init__(self):
         pass
