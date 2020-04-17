@@ -1,9 +1,10 @@
 from masonite.api.resources import Resource
 from masonite.request import Request
 from app.AfricaData import AfricaData
+from masonite.api.serializers import JSONSerializer
 
 
-class AfricaResource(Resource):
+class AfricaResource(Resource, JSONSerializer):
     model = AfricaData
     methods = ['index']
-    without = ['created_at']
+    without = ['id', 'created_at']

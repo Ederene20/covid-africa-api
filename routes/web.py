@@ -13,7 +13,5 @@ ROUTES = [
     # Api Routes
     CountryResource('/api/africa/countries').routes(),
 
-    # Get(CountryResource('api/africa/countries/@name/').show(request=Request)),
-
     AfricaResource('/api/africa').routes(),
 ]
