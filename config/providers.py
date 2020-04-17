@@ -13,6 +13,8 @@ from masonite.validation.providers import ValidationProvider
 from masonite.providers import CorsProvider
 from masonite.api.providers import ApiProvider
 
+from masonite.scheduler.providers import ScheduleProvider
+
 """Providers List
 Providers are a simple way to remove or add functionality for Masonite
 The providers in this list are either ran on server start or when a
@@ -30,6 +32,7 @@ PROVIDERS = [
     StatusCodeProvider,
     WhitenoiseProvider,
     ViewProvider,
+    ScheduleProvider,
 
     # Optional Framework Providers
     MailProvider,
