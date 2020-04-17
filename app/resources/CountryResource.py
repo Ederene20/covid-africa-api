@@ -6,12 +6,8 @@ from masonite.request import Request
 
 class CountryResource(Resource, JSONSerializer):
     model = Country
-    methods = ['index', 'show']
-    without = ['created_at']
-
-    def show(self, request: Request):
-        # dd(request.input('name'))
-        return self.model.where('name', request.input('name')).first()
+    methods = ['index']
+    without = ['id', 'created_at']
 
     def index(self):
         return self.model.all()
