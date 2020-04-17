@@ -19,7 +19,8 @@ class AfricaCountryController(Controller):
         self.request = request
 
     def single(self, request: Request, view: View):
-        country = Country.where('name', request.param('country')).first()
+        country = Country.where('name', request.param(
+            'country').capitalize()).first()
         #dd(Country.where('name', request.input('name')).first())
         return {'country': {
             'case_number': country.case_number,
