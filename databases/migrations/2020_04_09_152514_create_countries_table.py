@@ -8,6 +8,7 @@ class CreateCountriesTable(Migration):
         Run the migrations.
         """
         with self.schema.create('countries') as table:
+            table.increments('id')
             table.string('name')
 
             table.integer('case_number')
