@@ -9,7 +9,7 @@ from app.AfricaData import AfricaData
 
 class UpdateAfricaData(Task):
     ''' Task description '''
-    run_every = '1 minute'
+    twice_daily = ('1, 13')
 
     def __init__(self):
         pass
