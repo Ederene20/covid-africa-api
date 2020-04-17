@@ -8,3 +8,6 @@ class AfricaResource(Resource, JSONSerializer):
     model = AfricaData
     methods = ['index']
     without = ['id', 'created_at']
+
+    def index(self):
+        return self.model.all()
