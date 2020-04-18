@@ -10,7 +10,7 @@ class CreateAfricadatasTable(Migration):
         with self.schema.create('africadatas') as table:
             table.increments('id')
 
-            # table.date('date')
+            table.datetime('date')
             table.integer('new_cases')
             table.integer('new_deaths')
             table.integer('total_cases')
