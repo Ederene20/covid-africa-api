@@ -2,7 +2,6 @@ masonite>=2.3,<2.4
 masonite-logging>=1.0,<2.0
 masonite-validation>=3.0,<4.0
 gunicorn==20.0.4
-<<<<<<< HEAD
 hupper==1.9.1
 idna==2.9
 inflection==0.3.1
@@ -50,7 +49,6 @@ text-unidecode==1.2
 tldextract==2.2.2
 tzlocal==1.5.1
 urllib3==1.25.8
-=======
 masonite-api>=3.0.0
 pandas>=1.0.3
 numpy>=1.18.2
@@ -59,5 +57,4 @@ bs4>=0.0.1
 beautifulsoup4>=4.9.0
 psycopg2-binary>=2.8.5
 cleo==0.6.8 
->>>>>>> 5b048c51d6adab239394e8f544cc02af9e9db2fa
 waitress==1.4.3
