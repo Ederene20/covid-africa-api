@@ -19,7 +19,7 @@ class UpdateAfricaData(Task):
 
         for entry in data:
             AfricaData.create(
-                date=entry['date'],
+                # date=entry['date'],
                 new_cases=entry['new_cases'],
                 new_deaths=entry['new_deaths'],
                 total_cases=entry['total_cases'],
