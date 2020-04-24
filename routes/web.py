@@ -10,6 +10,7 @@ ROUTES = [
 
     Get('/api/countries/@country',
         'AfricaCountryController@single').name('country'),
+    Get('api/africa/@date', 'AfricaDataController@single').name('date'),
     # Api Routes
     CountryResource('/api/africa/countries').routes(),
 
