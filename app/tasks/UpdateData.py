@@ -13,6 +13,9 @@ class UpdateData(Task):
     def __init__(self):
         pass
 
+    def spliter(self, a):
+        return a.split(',')
+
     def handle(self):
         data = self.formatter(self.scraper())
 
@@ -20,9 +23,12 @@ class UpdateData(Task):
 
             Country.create(
                 name=key,
-                case_number=int(data[key]['case_number']),
-                case_death=int(data[key]['case_death']),
-                case_recovered=int(data[key]['case_recovered'])
+                case_number=int(
+                    "".join(self.spliter(data[key]['case_number']))),
+                case_death=int(
+                    "".join(self.spliter(data[key]['case_death']))),
+                case_recovered=int(
+                    "".join(self.spliter(data[key]['case_recovered'])))
             )
 
     def scraper(self):

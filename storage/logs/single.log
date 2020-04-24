@@ -16,3 +16,7 @@
 2020-04-16 20:17:48 - ERROR - ContainerError in /home/koladev/projects/covid/covid-africa-api/bootstrap/start.py on line 38
 2020-04-16 20:24:12 - ERROR - ContainerError in /home/koladev/projects/covid/covid-africa-api/bootstrap/start.py on line 38
 2020-04-17 12:49:01 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaCountryController.py on line 25
+2020-04-24 13:08:10 - ERROR - SyntaxError in /home/koladev/projects/covid/covid-africa-api/bootstrap/start.py on line 38
+2020-04-24 13:08:48 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaDataController.py on line 25
+2020-04-24 13:11:51 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaDataController.py on line 28
+2020-04-24 13:16:15 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaDataController.py on line 28
