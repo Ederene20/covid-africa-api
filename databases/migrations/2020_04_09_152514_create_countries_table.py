@@ -12,6 +12,7 @@ class CreateCountriesTable(Migration):
             table.string('name')
 
             table.integer('case_number')
+            table.integer('active_case')
             table.integer('case_death')
             table.integer('case_recovered')
 

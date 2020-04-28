@@ -23,6 +23,8 @@ class UpdateData(Task):
 
             Country.create(
                 name=key,
+                active_case=int(
+                    "".join(self.spliter(data[key]['active_case']))),
                 case_number=int(
                     "".join(self.spliter(data[key]['case_number']))),
                 case_death=int(
@@ -65,14 +67,15 @@ class UpdateData(Task):
             element.pop()  # we delete the last element of the list which is a reference
 
             # some country have very long names so we extract the first strings
-            country = element[:-3]
+            country = element[:-4]
             # which represent the name of the country
 
             country = " ".join(country)
-            # each element has a structure like this : ["countryname","number of case","number of death","number of recovered"]
+            # each element has a structure like this : ["countryname","active cases","number of case","number of death","number of recovered"]
             data_stats[country] = {
-                "case_number": element[-3].replace(',', ''),
-                "case_death": element[-2],
-                "case_recovered": element[-1]
+                "case_number": element[-4],
+                "active_case": element[-3],
+                "case_death": element[-1],
+                "case_recovered": element[-2]
             }
         return data_stats
