@@ -14,13 +14,16 @@ class UpdateData(Task):
         pass
 
     def spliter(self, a):
-        return a.split(',')
+        # As the data comes form wikipedia, there times somme characters may introducdes some errors.
+        a = a.split('[')
+        a = a[0].split(',')
+        return a
 
     def handle(self):
         data = self.formatter(self.scraper())
 
         for key in data.keys():
-
+            print(data[key])
             Country.create(
                 name=key,
                 active_case=int(
@@ -65,7 +68,9 @@ class UpdateData(Task):
 
             element = element.split()
             element.pop()  # we delete the last element of the list which is a reference
-
+            for b in element:
+                if ']' in b:
+                    element.remove(b)
             # some country have very long names so we extract the first strings
             country = element[:-4]
             # which represent the name of the country
