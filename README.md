@@ -6,13 +6,25 @@
 - Pip
 - Masonite
 - Masonite-api
-- Virtualenv 
+- virtualenv
 
 ## Setup
 ```bash
 craft install
 craft run serve
 ```
+If you are stuck here, refer to this [article](https://www.hellomasonite.com/post/setting-up-a-masonite-development-environment/) to better understand how to setup your masonite development environment.
+
+## Run the project locally
+First, configure your database environment. Refer to the official [documentation](https://docs.masoniteproject.com/orator-orm/database-migrations).
+
+```
+craft migrate
+craft schedule:run --task CreateAfricaData
+craft schedule:run --task CreateCountryData
+```
+Theses tasks will insert the data in your database. The next step now is to update your database. Check [here](https://github.com/Covid-Africa/covid-africa-api/blob/master/app/tasks/README.md) to see how to do it.
+
 ## How to use the API : 
 
 ### GET Country
