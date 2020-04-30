@@ -1,4 +1,5 @@
-''' Task Module Description '''
+'''This task updates the data about Africa historically. It's meant to be run as many times as possible.
+As OurWorldInData updates the data two times per day, so we'll run this one two times per day.'''
 from masonite.scheduler.Task import Task
 
 import pandas as pd
@@ -8,7 +9,6 @@ from app.AfricaData import AfricaData
 
 
 class UpdateAfricaData(Task):
-    ''' Task description '''
     run_every = '1 minute'
 
     def __init__(self):
@@ -16,15 +16,17 @@ class UpdateAfricaData(Task):
 
     def handle(self):
         data = self.africa_df_to_dict(self.africa_csv_to_df())
-
+        # We would normally add a simple line to insert just the last element, but OurWorldInData has
+        # the habit to correct some errors
+        # So for the sake of safety, we'll update every thing again.
         for entry in data:
-            AfricaData.create(
-                dates=entry['date'],
-                new_cases=entry['new_cases'],
-                new_deaths=entry['new_deaths'],
-                total_cases=entry['total_cases'],
-                total_deaths=entry['total_deaths']
-            )
+            date = AfricaData.where('dates', entry['date']).first()
+            date.new_cases = entry['new_cases']
+            date.new_deaths = entry['new_deaths']
+            date.total_cases = entry['total_cases']
+            date.total_deaths = entry['total_deaths']
+
+            date.save()
 
     def africa_csv_to_df(self):
 
@@ -51,7 +53,12 @@ class UpdateAfricaData(Task):
 
         dates = df_africa['date'].tolist()
         dates = list(dict.fromkeys(dates))
+
         dates.sort()
+
+        # The first case of Covid Africa was introduced the 2020-02-04, so we split the dates list
+        dates = dates[44:]
+
         sum_list = []
         for date in dates:
             df_temp = df_africa.loc[df_africa['date'] == date]

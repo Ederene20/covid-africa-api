@@ -53,6 +53,8 @@ class CreateAfricaData(Task):
         dates = df_africa['date'].tolist()
         dates = list(dict.fromkeys(dates))
         dates.sort()
+        # The first case of Covid Africa was introduced the 2020-02-04, so we split the dates list
+        dates = dates[44:]
         sum_list = []
         for date in dates:
             df_temp = df_africa.loc[df_africa['date'] == date]
