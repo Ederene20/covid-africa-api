@@ -1,6 +1,5 @@
-''' This task insert the data about each Countries in the Data Base. It's meaned to 
-run just one time.
-Main source : Wikipedia
+'''This task updates the data about each country in Africa. It's meant to be run as many times as possible.
+As Wikipedia updates the data two times per day, so we'll run this one two times per day.
 '''
 from masonite.scheduler.Task import Task
 from app.Country import Country
@@ -9,8 +8,8 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class CreateDataCountry(Task):
-    ''' Task description '''
+class UpdateCountryData(Task):
+
     run_every = '1 minute'
 
     def __init__(self):
@@ -26,18 +25,17 @@ class CreateDataCountry(Task):
         data = self.formatter(self.scraper())
 
         for key in data.keys():
-            print(data[key])
-            Country.create(
-                name=key,
-                active_case=int(
-                    "".join(self.spliter(data[key]['active_case']))),
-                case_number=int(
-                    "".join(self.spliter(data[key]['case_number']))),
-                case_death=int(
-                    "".join(self.spliter(data[key]['case_death']))),
-                case_recovered=int(
-                    "".join(self.spliter(data[key]['case_recovered'])))
-            )
+
+            country = Country.where('name', key).first()
+            country.active_case = int(
+                "".join(self.spliter(data[key]['active_case'])))
+            country.case_number = int(
+                "".join(self.spliter(data[key]['case_number'])))
+            country.case_death = int(
+                "".join(self.spliter(data[key]['case_death'])))
+            country.case_recovered = int(
+                "".join(self.spliter(data[key]['case_recovered'])))
+            country.save()
 
     def scraper(self):
         url = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Africa'

@@ -1,4 +1,7 @@
-''' Task Module Description '''
+''' This task insert the data about each Countries in the Data Base. It's meaned to 
+run just one time.
+Main source : Wikipedia
+'''
 from masonite.scheduler.Task import Task
 from app.Country import Country
 
@@ -6,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class UpdateData(Task):
+class CreateCountryData(Task):
     ''' Task description '''
     run_every = '1 minute'
 
