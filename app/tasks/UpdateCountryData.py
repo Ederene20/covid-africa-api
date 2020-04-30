@@ -1,4 +1,6 @@
-''' Task Module Description '''
+'''This task updates the data about each country in Africa. It's meant to be run as many times as possible.
+As Wikipedia updates the data two times per day, so we'll run this one two times per day.
+'''
 from masonite.scheduler.Task import Task
 from app.Country import Country
 
@@ -6,32 +8,34 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class UpdateData(Task):
-    ''' Task description '''
+class UpdateCountryData(Task):
+
     run_every = '1 minute'
 
     def __init__(self):
         pass
 
     def spliter(self, a):
-        return a.split(',')
+        # As the data comes form wikipedia, there times somme characters may introducdes some errors.
+        a = a.split('[')
+        a = a[0].split(',')
+        return a
 
     def handle(self):
         data = self.formatter(self.scraper())
 
         for key in data.keys():
 
-            Country.create(
-                name=key,
-                active_case=int(
-                    "".join(self.spliter(data[key]['active_case']))),
-                case_number=int(
-                    "".join(self.spliter(data[key]['case_number']))),
-                case_death=int(
-                    "".join(self.spliter(data[key]['case_death']))),
-                case_recovered=int(
-                    "".join(self.spliter(data[key]['case_recovered'])))
-            )
+            country = Country.where('name', key).first()
+            country.active_case = int(
+                "".join(self.spliter(data[key]['active_case'])))
+            country.case_number = int(
+                "".join(self.spliter(data[key]['case_number'])))
+            country.case_death = int(
+                "".join(self.spliter(data[key]['case_death'])))
+            country.case_recovered = int(
+                "".join(self.spliter(data[key]['case_recovered'])))
+            country.save()
 
     def scraper(self):
         url = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Africa'
@@ -65,7 +69,9 @@ class UpdateData(Task):
 
             element = element.split()
             element.pop()  # we delete the last element of the list which is a reference
-
+            for b in element:
+                if ']' in b:
+                    element.remove(b)
             # some country have very long names so we extract the first strings
             country = element[:-4]
             # which represent the name of the country
