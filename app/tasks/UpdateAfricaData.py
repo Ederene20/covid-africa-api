@@ -25,7 +25,7 @@ class UpdateAfricaData(Task):
             date.new_deaths = entry['new_deaths']
             date.total_cases = entry['total_cases']
             date.total_deaths = entry['total_deaths']
-
+            print(date.dates)
             date.save()
 
     def africa_csv_to_df(self):
