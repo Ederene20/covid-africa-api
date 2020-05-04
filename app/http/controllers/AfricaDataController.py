@@ -32,3 +32,6 @@ class AfricaDataController(Controller):
                     'total_deaths': date.total_deaths
                 }
             }
+
+    def show(self, request: Request):
+        return request.redirect('https://www.covidafrica.info/api')

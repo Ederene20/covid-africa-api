@@ -22,8 +22,11 @@ class AfricaCountryController(Controller):
         country = Country.where('name', request.param(
             'country').capitalize()).first()
         #dd(Country.where('name', request.input('name')).first())
-        return {'country': {
-            'case_number': country.case_number,
-            'case_recovered': country.case_recovered,
-            'case_death': country.case_death
-        }}
+        if country is None:
+            return '<h3>There is no country of this name.</h3>'
+        else:
+            return {'country': {
+                'case_number': country.case_number,
+                'case_recovered': country.case_recovered,
+                'case_death': country.case_death
+            }}

@@ -70,7 +70,8 @@ class CreateCountryData(Task):
         for element in data:
 
             element = element.split()
-            element.pop()  # we delete the last element of the list which is a reference
+            if ']' in element[-1]:
+                element.pop()  # we delete the last element of the list which is a reference
             for b in element:
                 if ']' in b:
                     element.remove(b)
@@ -79,6 +80,12 @@ class CreateCountryData(Task):
             # which represent the name of the country
 
             country = " ".join(country)
+            # We must modify some contries name to show it in google-charts
+            if country == "Democratic Republic of the Congo":
+                country = "Democratic Republic of Congo"
+            if country == "Republic of Congo":
+                country = "Congo"
+
             # each element has a structure like this : ["countryname","active cases","number of case","number of death","number of recovered"]
             data_stats[country] = {
                 "case_number": element[-4],

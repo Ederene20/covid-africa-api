@@ -21,18 +21,26 @@ class UpdateAfricaData(Task):
         # So for the sake of safety, we'll update every thing again.
         for entry in data:
             date = AfricaData.where('dates', entry['date']).first()
-            date.new_cases = entry['new_cases']
-            date.new_deaths = entry['new_deaths']
-            date.total_cases = entry['total_cases']
-            date.total_deaths = entry['total_deaths']
-
-            date.save()
+            if date is not None:
+                date.new_cases = entry['new_cases']
+                date.new_deaths = entry['new_deaths']
+                date.total_cases = entry['total_cases']
+                date.total_deaths = entry['total_deaths']
+                print(date.dates)
+                date.save()
+            else:
+                AfricaData.create(
+                    dates=entry['date'],
+                    new_cases=entry['new_cases'],
+                    new_deaths=entry['new_deaths'],
+                    total_cases=entry['total_cases'],
+                    total_deaths=entry['total_deaths']
+                )
 
     def africa_csv_to_df(self):
 
-        countries_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Democratic Republic of the Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Ivory Coast', 'Kenya', 'Liberia', 'Libya',
-                          'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mayotte', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Republic of the Congo', 'Rwanda', 'Réunion', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'São Tomé and Príncipe', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
-
+        countries_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Democratic Republic of Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Cote d\'Ivoire', 'Kenya', 'Liberia', 'Libya',
+                          'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mayotte', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Congo', 'Rwanda', 'Réunion', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Sao Tome and Principe', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
         df = pd.read_csv('https://covid.ourworldindata.org/data/ecdc/full_data.csv',
                          index_col=1, parse_dates=True)
 
