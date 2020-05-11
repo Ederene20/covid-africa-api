@@ -1,6 +1,6 @@
 ''' Task Module Description '''
 from masonite.scheduler.Task import Task
-from app.CountryHistoric import CountryHistoricData
+from app.CountryHistoric import CountryHistoric
 
 import pandas as pd
 import requests
