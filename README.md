@@ -24,8 +24,8 @@ First, configure your database environment. Refer to the official [documentation
 
 ```
 craft migrate
-craft schedule:run --task CreateAfricaData
-craft schedule:run --task CreateCountryData
+craft schedule:run --task UpdateAfricaData
+craft schedule:run --task UpdateCountryData
 ```
 
 Theses tasks will insert the data in your database. The next step now is to update your database. Check [here](https://github.com/Covid-Africa/covid-africa-api/blob/master/app/tasks/README.md) to see how to do it.
