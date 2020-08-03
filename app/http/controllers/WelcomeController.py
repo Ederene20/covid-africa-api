@@ -18,4 +18,4 @@ class WelcomeController(Controller):
         Returns:
             masonite.view.View -- The Masonite view class.
         """
-        return str(generate_random_string())
+        return 'Welcome'
