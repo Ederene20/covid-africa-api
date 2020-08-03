@@ -1,12 +1,11 @@
 """Web Routes."""
 
-from masonite.routes import Get, Post
-from masonite.request import Request
+from masonite.routes import Get
 from app.resources.CountryResource import CountryResource
 from app.resources.AfricaResource import AfricaResource
 
 ROUTES = [
-    #Get('/', 'WelcomeController@show').name('welcome'),
+    Get('/', 'WelcomeController@show').name('welcome'),
     Get('/api', 'AfricaDataController@show').name('api'),
     Get('/api/africa/countries/@country',
         'AfricaCountryController@single').name('country'),

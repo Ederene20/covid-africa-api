@@ -21,7 +21,7 @@ class AfricaCountryController(Controller):
     def single(self, request: Request, view: View):
         country = Country.where('name', request.param(
             'country').capitalize()).first()
-        #dd(Country.where('name', request.input('name')).first())
+        # dd(Country.where('name', request.input('name')).first())
         if country is None:
             return '<h3>There is no country of this name.</h3>'
         else:

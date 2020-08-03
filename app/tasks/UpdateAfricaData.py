@@ -1,9 +1,7 @@
-'''This task updates the data about Africa historically. It's meant to be run as many times as possible.
-As OurWorldInData updates the data two times per day, so we'll run this one two times per day.'''
+"""This task updates the data about Africa historically. It's meant to be run as many times as possible.
+As OurWorldInData updates the data two times per day, so we'll run this one two times per day."""
 from masonite.scheduler.Task import Task
-
 import pandas as pd
-import requests
 
 from app.AfricaData import AfricaData
 
@@ -37,10 +35,17 @@ class UpdateAfricaData(Task):
                     total_deaths=entry['total_deaths']
                 )
 
+    @staticmethod
     def africa_csv_to_df(self):
 
-        countries_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Democratic Republic of Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Cote d\'Ivoire', 'Kenya', 'Liberia', 'Libya',
-                          'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mayotte', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Congo', 'Rwanda', 'Réunion', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Sao Tome and Principe', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
+        countries_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde',
+                          'Central African Republic', 'Chad', 'Democratic Republic of Congo', 'Djibouti', 'Egypt',
+                          'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea',
+                          'Guinea-Bissau', 'Cote d\'Ivoire', 'Kenya', 'Liberia', 'Libya',
+                          'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mayotte', 'Morocco', 'Mozambique',
+                          'Namibia', 'Niger', 'Nigeria', 'Congo', 'Rwanda', 'Réunion', 'Senegal', 'Seychelles',
+                          'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Sao Tome and Principe',
+                          'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
         df = pd.read_csv('https://covid.ourworldindata.org/data/ecdc/full_data.csv',
                          index_col=1, parse_dates=True)
 
@@ -56,6 +61,7 @@ class UpdateAfricaData(Task):
 
     # Here we'll try to get the total of cases and cases death in all Africa
 
+    @staticmethod
     def africa_df_to_dict(self, df_africa):
         df_africa.sort_values(by=['date'])
 
@@ -74,9 +80,9 @@ class UpdateAfricaData(Task):
         # print(sum_list)
         sum_list = pd.DataFrame(sum_list)
         sum_list['date'] = sum_list['date'].apply(lambda x: x[:10])
-        #sum_list = sum_list.set_index('date')
+        # sum_list = sum_list.set_index('date')
 
-        #sum_list['date'] = pd.to_datetime(sum_list['date'])
+        # sum_list['date'] = pd.to_datetime(sum_list['date'])
         df_africa_total = sum_list.to_dict(orient='records')
 
         return df_africa_total
