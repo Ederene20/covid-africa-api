@@ -1,13 +1,13 @@
-''' Task Module Description '''
+""" Task Module Description """
 from masonite.scheduler.Task import Task
-from app.CountryHistoric import CountryHistoricData
+from app.CountryHistoric import CountryHistoric
 
 import pandas as pd
 import requests
 
 
 class UpdateCountryHistoricData(Task):
-    ''' Task description '''
+    """ Task description """
     run_every = '1 minute'
 
     def __init__(self):
@@ -16,6 +16,7 @@ class UpdateCountryHistoricData(Task):
     def handle(self):
         pass
 
+    @staticmethod
     def africa_csv_to_df(self):
 
         countries_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Democratic Republic of Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Cote d\'Ivoire', 'Kenya', 'Liberia', 'Libya',

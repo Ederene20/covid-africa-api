@@ -1,6 +1,6 @@
-'''This task updates the data about each country in Africa. It's meant to be run as many times as possible.
+"""This task updates the data about each country in Africa. It's meant to be run as many times as possible.
 As Wikipedia updates the data two times per day, so we'll run this one two times per day.
-'''
+"""
 from masonite.scheduler.Task import Task
 from app.Country import Country
 
@@ -15,7 +15,8 @@ class UpdateCountryData(Task):
     def __init__(self):
         pass
 
-    def spliter(self, a):
+    @staticmethod
+    def splitter(self, a):
         # As the data comes form wikipedia, there times somme characters may introducdes some errors.
         a = a.split('[')
         a = a[0].split(',')
@@ -29,27 +30,28 @@ class UpdateCountryData(Task):
             country = Country.where('name', key).first()
             if country is not None:
                 country.active_case = int(
-                    "".join(self.spliter(data[key]['active_case'])))
+                    "".join(self.splitter(data[key]['active_case'])))
                 country.case_number = int(
-                    "".join(self.spliter(data[key]['case_number'])))
+                    "".join(self.splitter(data[key]['case_number'])))
                 country.case_death = int(
-                    "".join(self.spliter(data[key]['case_death'])))
+                    "".join(self.splitter(data[key]['case_death'])))
                 country.case_recovered = int(
-                    "".join(self.spliter(data[key]['case_recovered'])))
+                    "".join(self.splitter(data[key]['case_recovered'])))
                 country.save()
             else:
                 Country.create(
                     name=key,
                     active_case=int(
-                        "".join(self.spliter(data[key]['active_case']))),
+                        "".join(self.splitter(data[key]['active_case']))),
                     case_number=int(
-                        "".join(self.spliter(data[key]['case_number']))),
+                        "".join(self.splitter(data[key]['case_number']))),
                     case_death=int(
-                        "".join(self.spliter(data[key]['case_death']))),
+                        "".join(self.splitter(data[key]['case_death']))),
                     case_recovered=int(
-                        "".join(self.spliter(data[key]['case_recovered'])))
+                        "".join(self.splitter(data[key]['case_recovered'])))
                 )
 
+    @staticmethod
     def scraper(self):
         url = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Africa'
 
@@ -65,6 +67,7 @@ class UpdateCountryData(Task):
             row.append(tr.text.replace('\n', ' ').strip())
         return row
 
+    @staticmethod
     def formatter(self, data):
         """
     Format the data returned by the scraper in usable format
@@ -96,7 +99,8 @@ class UpdateCountryData(Task):
                 country = "Democratic Republic of Congo"
             if country == "Republic of Congo":
                 country = "Congo"
-            # each element has a structure like this : ["countryname","active cases","number of case","number of death","number of recovered"]
+            # each element has a structure like this : ["countryname","active cases","number of case","number of
+            # death","number of recovered"]
             data_stats[country] = {
                 "case_number": element[-4],
                 "active_case": element[-3],

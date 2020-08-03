@@ -20,3 +20,6 @@
 2020-04-24 13:08:48 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaDataController.py on line 25
 2020-04-24 13:11:51 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaDataController.py on line 28
 2020-04-24 13:16:15 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/AfricaDataController.py on line 28
+2020-07-16 13:29:06 - ERROR - AttributeError in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/WelcomeController.py on line 22
+2020-07-16 13:30:13 - ERROR - TemplateNotFound in /home/koladev/projects/covid/covid-africa-api/app/http/controllers/WelcomeController.py on line 22
+2020-07-16 13:32:13 - ERROR - ContainerError in /home/koladev/projects/covid/covid-africa-api/bootstrap/start.py on line 38

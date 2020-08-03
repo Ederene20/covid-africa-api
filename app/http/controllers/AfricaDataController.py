@@ -22,7 +22,7 @@ class AfricaDataController(Controller):
         date = AfricaData.where('dates', request.param(
             'date')).first()
         if date is None:
-            return '<h2>Be sure the date is between 2019-12-31 and yesterday date.</h2>'
+            return '<h2>Be sure the date is between 2020-02-13 and yesterday date.</h2>'
         else:
             return {
                 date.dates: {
