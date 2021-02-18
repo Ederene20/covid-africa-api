@@ -59,7 +59,7 @@ class UpdateCountryData(Task):
 
         soup = BeautifulSoup(page_content, features='html.parser')
 
-        table = soup.find('table', attrs={'class': 'wikitable sortable'})
+        table = soup.find('table', attrs={'class': 'wikitable sortable plainrowheaders jquery-tablesorter'})
         data = table.find_all('tr')
         row = []
 
