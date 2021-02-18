@@ -14,7 +14,7 @@ class UpdateAfricaData(Task):
         pass
 
     def handle(self):
-        data = self.africa_df_to_dict(self.africa_csv_to_df(self))
+        data = self.africa_df_to_dict(self, df_africa=self.africa_csv_to_df(self))
         # We would normally add a simple line to insert just the last element, but OurWorldInData has
         # the habit to correct some errors
         # So for the sake of safety, we'll update every thing again.
