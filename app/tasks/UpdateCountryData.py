@@ -23,32 +23,32 @@ class UpdateCountryData(Task):
         return a
 
     def handle(self):
-        data = self.formatter(self.scraper(self))
+        data = self.formatter(self, data=self.scraper(self))
 
         for key in data.keys():
 
             country = Country.where('name', key).first()
             if country is not None:
                 country.active_case = int(
-                    "".join(self.splitter(data[key]['active_case'])))
+                    "".join(self.splitter(self, a=data[key]['active_case'])))
                 country.case_number = int(
-                    "".join(self.splitter(data[key]['case_number'])))
+                    "".join(self.splitter(self, a=data[key]['case_number'])))
                 country.case_death = int(
-                    "".join(self.splitter(data[key]['case_death'])))
+                    "".join(self.splitter(self, a=data[key]['case_death'])))
                 country.case_recovered = int(
-                    "".join(self.splitter(data[key]['case_recovered'])))
+                    "".join(self.splitter(self, a=data[key]['case_recovered'])))
                 country.save()
             else:
                 Country.create(
                     name=key,
                     active_case=int(
-                        "".join(self.splitter(data[key]['active_case']))),
+                        "".join(self.splitter(self, a=data[key]['active_case']))),
                     case_number=int(
-                        "".join(self.splitter(data[key]['case_number']))),
+                        "".join(self.splitter(self, a=data[key]['case_number']))),
                     case_death=int(
-                        "".join(self.splitter(data[key]['case_death']))),
+                        "".join(self.splitter(self, a=data[key]['case_death']))),
                     case_recovered=int(
-                        "".join(self.splitter(data[key]['case_recovered'])))
+                        "".join(self.splitter(self, a=data[key]['case_recovered'])))
                 )
 
     @staticmethod
@@ -59,7 +59,7 @@ class UpdateCountryData(Task):
 
         soup = BeautifulSoup(page_content, features='html.parser')
 
-        table = soup.find('table', attrs={'class': 'wikitable sortable plainrowheaders jquery-tablesorter'})
+        table = soup.find('table', attrs={'class': 'wikitable sortable plainrowheaders'})
         data = table.find_all('tr')
         row = []
 

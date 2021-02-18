@@ -2,6 +2,7 @@
 As OurWorldInData updates the data two times per day, so we'll run this one two times per day."""
 from masonite.scheduler.Task import Task
 import pandas as pd
+from urllib.request import Request, urlopen
 
 from app.AfricaData import AfricaData
 
@@ -38,6 +39,10 @@ class UpdateAfricaData(Task):
     @staticmethod
     def africa_csv_to_df(self):
 
+        req = Request('https://covid.ourworldindata.org/data/ecdc/full_data.csv')
+        req.add_header('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0')
+        content=urlopen(req)
+
         countries_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde',
                           'Central African Republic', 'Chad', 'Democratic Republic of Congo', 'Djibouti', 'Egypt',
                           'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea',
@@ -46,7 +51,7 @@ class UpdateAfricaData(Task):
                           'Namibia', 'Niger', 'Nigeria', 'Congo', 'Rwanda', 'Réunion', 'Senegal', 'Seychelles',
                           'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Sao Tome and Principe',
                           'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
-        df = pd.read_csv('https://covid.ourworldindata.org/data/ecdc/full_data.csv',
+        df = pd.read_csv(content,
                          index_col=1, parse_dates=True)
 
         df_africa = []
