@@ -23,7 +23,7 @@ class UpdateCountryData(Task):
         return a
 
     def handle(self):
-        data = self.formatter(self.scraper())
+        data = self.formatter(self.scraper(self))
 
         for key in data.keys():
 
